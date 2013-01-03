@@ -32,7 +32,7 @@ MicroEvent.prototype  = {
 
 // Add some method aliases.
 MicroEvent.prototype.on = MicroEvent.prototype.bind;
-MicroEvent.prototype.off = MicroEvent.prototype.unbind;
+MicroEvent.prototype.off = MicroEvent.prototype.removeListener = MicroEvent.prototype.unbind;
 MicroEvent.prototype.emit = MicroEvent.prototype.trigger;
 
 /**
