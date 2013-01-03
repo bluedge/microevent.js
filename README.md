@@ -1,5 +1,6 @@
 # Bluedge version
-Simply mapping node.js EventEmmiter method names by adding some alias.
+- Mapping node.js EventEmmiter method names.
+- Remove the method alias as it wont work in all situations.
 
 
 
@@ -13,7 +14,7 @@ a <a href="https://github.com/jeromeetienne/microevent.js/blob/master/microevent
 
 ## How to Use It
 
-You need a single file [microevent.js](https://github.com/jeromeetienne/microevent.js/raw/master/microevent.js).
+You need a single file [microevent.js](https://github.com/bluedge/microevent.js).
 Include it in a webpage via the usual script tag.
 
     <script src="microevent.js"></script>
@@ -38,7 +39,7 @@ triggering 'tick' event every second, and add the current date as parameter
     var Ticker = function(){
         var self = this;
         setInterval(function(){
-            self.trigger('tick', new Date());
+            self.emit('tick', new Date());
         }, 1000);
     };
 
@@ -52,7 +53,7 @@ Now lets actually use the _Ticker_ Class. First, create the object.
     
 and bind our _tick_ event with its data parameter
 
-    ticker.bind('tick', function(date) {
+    ticker.on('tick', function(date) {
         console.log('notified date', date);
     });
 
