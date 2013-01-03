@@ -1,3 +1,8 @@
+# Bluedge version
+Simply mapping node.js EventEmmiter method names by adding some alias.
+
+
+
 # MicroEvent.js
 
 _MicroEvent.js_ is a event emitter library which provides the
