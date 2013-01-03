@@ -11,17 +11,17 @@
 
 var MicroEvent  = function(){}
 MicroEvent.prototype  = {
-  bind  : function(event, fct){
+  on  : function(event, fct){
     this._events = this._events || {};
     this._events[event] = this._events[event] || [];
     this._events[event].push(fct);
   },
-  unbind  : function(event, fct){
+  removeListener  : function(event, fct){
     this._events = this._events || {};
     if( event in this._events === false  )  return;
     this._events[event].splice(this._events[event].indexOf(fct), 1);
   },
-  trigger : function(event /* , args... */){
+  emit : function(event /* , args... */){
     this._events = this._events || {};
     if( event in this._events === false  )  return;
     for(var i = 0; i < this._events[event].length; i++){
@@ -29,11 +29,6 @@ MicroEvent.prototype  = {
     }
   }
 };
-
-// Add some method aliases.
-MicroEvent.prototype.on = MicroEvent.prototype.bind;
-MicroEvent.prototype.off = MicroEvent.prototype.removeListener = MicroEvent.prototype.unbind;
-MicroEvent.prototype.emit = MicroEvent.prototype.trigger;
 
 /**
  * mixin will delegate all MicroEvent.js function in the destination object
@@ -43,7 +38,7 @@ MicroEvent.prototype.emit = MicroEvent.prototype.trigger;
  * @param {Object} the object which will support MicroEvent
 */
 MicroEvent.mixin  = function(destObject){
-  var props = ['bind', 'unbind', 'trigger'];
+  var props = ['on', 'removeListener', 'emit'];
   for(var i = 0; i < props.length; i ++){
     destObject.prototype[props[i]]  = MicroEvent.prototype[props[i]];
   }
@@ -51,5 +46,5 @@ MicroEvent.mixin  = function(destObject){
 
 // export in common js
 if( typeof module !== "undefined" && ('exports' in module)){
-  module.exports  = MicroEvent
+  module.exports = MicroEvent
 }
