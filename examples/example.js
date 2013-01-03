@@ -7,7 +7,7 @@ var MicroEvent	= require('../microevent-debug.js')
 var Ticker	= function( interval ){
 	var self	= this;
 	setInterval(function(){
-		self.trigger('tick', new Date());
+		self.emit('tick', new Date());
 	}, 1000);
 };
 /**
@@ -18,7 +18,7 @@ MicroEvent.mixin(Ticker);
 // create a ticker
 var ticker = new Ticker();
 // bind the 'tick' event
-ticker.bind('tick', function(date) {
+ticker.on('tick', function(date) {
 	// display to check
 	console.log('notified date', date);
 });
